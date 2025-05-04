@@ -129,6 +129,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(187, 449);
             panel1.TabIndex = 5;
+            panel1.Paint += panel1_Paint;
             // 
             // checkBoxWANMode
             // 
@@ -139,6 +140,7 @@
             checkBoxWANMode.TabIndex = 10;
             checkBoxWANMode.Text = "WAN Mode";
             checkBoxWANMode.UseVisualStyleBackColor = true;
+            checkBoxWANMode.Click += wanBoxClicked;
             // 
             // buttonReset
             // 
@@ -173,6 +175,7 @@
             buttonApply.TabIndex = 7;
             buttonApply.Text = "APPLY";
             buttonApply.UseVisualStyleBackColor = false;
+            buttonApply.Click += save_CFG;
             // 
             // label6
             // 
@@ -193,7 +196,7 @@
             richTextToken.Name = "richTextToken";
             richTextToken.Size = new Size(149, 33);
             richTextToken.TabIndex = 5;
-            richTextToken.Text = "";
+            richTextToken.Text = "abcde12345";
             richTextToken.TextChanged += richTextToken_TextChanged;
             // 
             // label5
@@ -214,7 +217,7 @@
             richTextMasterPort.Name = "richTextMasterPort";
             richTextMasterPort.Size = new Size(149, 33);
             richTextMasterPort.TabIndex = 3;
-            richTextMasterPort.Text = "";
+            richTextMasterPort.Text = "65000";
             // 
             // label4
             // 
@@ -244,7 +247,7 @@
             richTextMasterIP.Name = "richTextMasterIP";
             richTextMasterIP.Size = new Size(149, 33);
             richTextMasterIP.TabIndex = 0;
-            richTextMasterIP.Text = "";
+            richTextMasterIP.Text = "255.255.255.255";
             richTextMasterIP.TextChanged += richTextBox1_TextChanged;
             // 
             // panel2

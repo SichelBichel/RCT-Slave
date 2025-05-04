@@ -11,10 +11,9 @@ namespace RCT_Slave
         public static Form1 form;
 
 
-        public static string hostName = "EnterTargetHostname";
-        public static string serverIp = "127.0.0.1";
-        public static int serverPort = 65534;
-        public static int responsePort = 1;
+        public static string MasterIp = "127.0.0.1";
+        public static int MasterPort = 1;
+        public static int responsePort = 65534;
         public static string token = "12345";
         public static string hashKey = "c71ee8230724cc1eef15740fba8506a2";
         public static bool WanMode = false;
@@ -27,13 +26,16 @@ namespace RCT_Slave
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            form = new Form1();
+            Application.Run(form);
         }
 
-
+        public static async void coreInit()
+        {
+            await Task.Delay(500);
+            Program.InitReadback();
+        }
 
         //##############################
         //         Read/Write
@@ -51,17 +53,16 @@ namespace RCT_Slave
                     using (StreamReader reader = new StreamReader(filePath))
                     {
                         Config config = (Config)serializer.Deserialize(reader);
-                        serverIp = config.MasterIP;
+                        MasterIp = config.MasterIP;
                         if (silentMode == false)
                         {
                             form.AppendSuccess("config.xml loaded and applied!");
                         }
-                        serverPort = config.ListenerPort;
+                        MasterPort = config.MasterPort;
                         token = config.Token;
-                        responsePort = config.ListenerPort + 1;
+                        responsePort = config.MasterPort + 1;
                         WanMode = config.WanMode;
-                        form.Text = ("RCT-Master: " + hostName);
-                        form.LogToFile("[LOG READ CONTENT] " + serverIp + ":" + serverPort + ":" + token + ":" + hostName + "[LOG READ CONTENT]");
+                        form.LogToFile("[LOG READ CONTENT] " + MasterIp + ":" + MasterPort + ":" + token + ":" + "[LOG READ CONTENT]");
 
 
                         return config;
@@ -92,11 +93,11 @@ namespace RCT_Slave
                 using (StreamWriter writer = new StreamWriter(filePath))
                 {
                     serializer.Serialize(writer, config);
-                    serverIp = config.MasterIP;
-                    serverPort = config.ListenerPort;
+                    MasterIp = config.MasterIP;
+                    MasterPort = config.MasterPort;
                     token = config.Token;
                     WanMode = config.WanMode;
-                    form.LogToFile("[CFG WRITE CONTENT] " + serverIp + ":" + serverPort + ":" + token + ":" + "[CFG WRITE CONTENT]");
+                    form.LogToFile("[CFG WRITE CONTENT] " + MasterIp + ":" + MasterPort + ":" + token + ":" + "[CFG WRITE CONTENT]");
                 }
                 form.AppendSuccess("config.xml saved!");
                 await Task.Delay(200);
@@ -120,7 +121,7 @@ namespace RCT_Slave
             listenerRunning = true;
             listenerCancelToken = new CancellationTokenSource();
 
-            await Task.Run(() => ReadbackListener(serverIp, responsePort, listenerCancelToken.Token));
+            await Task.Run(() => ReadbackListener(MasterIp, MasterPort, listenerCancelToken.Token));
         }
 
         public static async Task ReadbackListener(string ipAddress, int port, CancellationToken cancellationToken)

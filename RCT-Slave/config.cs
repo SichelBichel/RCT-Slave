@@ -14,8 +14,8 @@ namespace RCT_Slave
         [XmlElement("MasterIP")]
         public string MasterIP { get; set; }
 
-        [XmlElement("ListenerPort")]
-        public int ListenerPort { get; set; }
+        [XmlElement("MasterPort")]
+        public int MasterPort { get; set; }
 
         [XmlElement("Token")]
         public string Token { get; set; }

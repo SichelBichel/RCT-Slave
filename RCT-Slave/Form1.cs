@@ -6,11 +6,28 @@ namespace RCT_Slave
     {
         public Form1()
         {
+            LogToFile("\n\n ---------- NEW SESSION ---------- \n\n");
             InitializeComponent();
+            PostInit();
         }
 
+        private async void PostInit()
+        {
+            AppendInfoText("Waiting for PostInit...");
+            await Task.Delay(1000);
+            Program.coreInit();
+            reload_CFG(null, null);
+            AppendSuccess("Post Init successful!");
+            postPostInit();
 
+        }
 
+        private async void postPostInit()
+        {
+            await Task.Delay(1000);
+            AppendInfoText("\n--[========|========|==RCT Online==|========|========]--\n");
+
+        }
 
         //##############################
         //         RichText Append
@@ -172,7 +189,7 @@ namespace RCT_Slave
             if (config != null)
             {
                 richTextMasterIP.Text = config.MasterIP;
-                richTextMasterPort.Text = config.ListenerPort.ToString();
+                richTextMasterPort.Text = config.MasterPort.ToString();
                 richTextToken.Text = config.Token;
                 checkBoxWANMode.Checked = config.WanMode;
             }
@@ -186,7 +203,30 @@ namespace RCT_Slave
             }
         }
 
+        private void save_CFG(object sender, EventArgs e)
+        {
+            AppendInfoText("Saving config.xml ...");
+            Config config = new Config
+            {
+                MasterIP = richTextMasterIP.Text,
+                MasterPort = int.Parse(richTextMasterPort.Text),
+                Token = richTextToken.Text,
+                WanMode = checkBoxWANMode.Checked
 
+            };
+            Program.SaveConfigFile(config, "config.xml");
+        }
+
+
+
+
+
+
+
+        private void wanBoxClicked(object sender, EventArgs e)
+        {
+            MessageBox.Show("WAN Mode: \n\nOn: Invalid Responses are filtered \nOff: Invalid Responses are displayed ", "RCT", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+        }
 
 
 
@@ -259,5 +299,9 @@ namespace RCT_Slave
 
         }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
