@@ -184,22 +184,24 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(18, 197);
+            label6.Location = new Point(19, 193);
             label6.Name = "label6";
             label6.Size = new Size(41, 15);
             label6.TabIndex = 6;
             label6.Text = "Token:";
+            label6.Click += label6_Click;
             // 
             // richTextToken
             // 
             richTextToken.BackColor = Color.Black;
             richTextToken.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             richTextToken.ForeColor = Color.Yellow;
-            richTextToken.Location = new Point(20, 215);
+            richTextToken.Location = new Point(18, 210);
             richTextToken.Name = "richTextToken";
             richTextToken.Size = new Size(149, 33);
             richTextToken.TabIndex = 5;
             richTextToken.Text = "";
+            richTextToken.TextChanged += richTextToken_TextChanged;
             // 
             // buttonApply
             // 
