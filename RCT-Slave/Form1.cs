@@ -217,7 +217,82 @@ namespace RCT_Slave
             Program.SaveConfigFile(config, "config.xml");
         }
 
+        private async void delCFG(object sender, EventArgs e)
+        {
 
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to reset the configuration?",
+                "Reset Config",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2);
+
+            if (result != DialogResult.Yes)
+            {
+                AppendInfoText("Reset cancelled by user.");
+                return;
+            }
+
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.xml");
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+                AppendInfoText("Config deleted.");
+            }
+            else
+            {
+                AppendWarning("config.xml does not exist.");
+            }
+
+            await Task.Delay(250);
+
+            Config defaultConfig = CreateDefaultConfig();
+            Program.SaveConfigFile(defaultConfig, "config.xml");
+            await Task.Delay(200);
+            reload_CFG(null, null);
+        }
+
+
+        private Config CreateDefaultConfig()
+        {
+            return new Config
+            {
+                MasterIP = "127.0.0.1",
+                MasterPort = 65000,
+                Token = "12345",
+                WanMode = false,
+
+                Event1Name = "none",
+                Event1Path = "empty",
+                Event2Name = "none",
+                Event2Path = "empty",
+                Event3Name = "none",
+                Event3Path = "empty",
+                Event4Name = "none",
+                Event4Path = "empty",
+                Event5Name = "none",
+                Event5Path = "empty",
+                Event6Name = "none",
+                Event6Path = "empty",
+                Event7Name = "none",
+                Event7Path = "empty",
+                Event8Name = "none",
+                Event8Path = "empty",
+                Event9Name = "none",
+                Event9Path = "empty",
+                Event10Name = "none",
+                Event10Path = "empty",
+                Event11Name = "none",
+                Event11Path = "empty",
+                Event12Name = "none",
+                Event12Path = "empty",
+                Event13Name = "none",
+                Event13Path = "empty",
+                Event14Name = "none",
+                Event14Path = "empty"
+            };
+        }
 
 
 
@@ -303,5 +378,6 @@ namespace RCT_Slave
         {
 
         }
+
     }
 }

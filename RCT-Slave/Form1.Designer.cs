@@ -152,6 +152,7 @@
             buttonReset.TabIndex = 9;
             buttonReset.Text = "RESET";
             buttonReset.UseVisualStyleBackColor = false;
+            buttonReset.Click += delCFG;
             // 
             // buttonReload
             // 
