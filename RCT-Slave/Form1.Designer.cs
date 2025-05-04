@@ -35,22 +35,22 @@
             label1 = new Label();
             label2 = new Label();
             panel1 = new Panel();
-            richTextMasterIP = new RichTextBox();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            richTextMasterPort = new RichTextBox();
+            checkBoxWANMode = new CheckBox();
+            buttonReset = new Button();
+            buttonReload = new Button();
+            buttonApply = new Button();
             label6 = new Label();
             richTextToken = new RichTextBox();
-            buttonApply = new Button();
-            buttonReload = new Button();
-            buttonReset = new Button();
-            checkBoxWANMode = new CheckBox();
+            label5 = new Label();
+            richTextMasterPort = new RichTextBox();
+            label4 = new Label();
+            label3 = new Label();
+            richTextMasterIP = new RichTextBox();
             panel2 = new Panel();
+            buttonLog = new Button();
+            buttonConfig = new Button();
+            buttonClear = new Button();
             label7 = new Label();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
             buttonUpdate = new Button();
             buttonHelp = new Button();
             linkLabel1 = new LinkLabel();
@@ -130,56 +130,49 @@
             panel1.Size = new Size(187, 449);
             panel1.TabIndex = 5;
             // 
-            // richTextMasterIP
+            // checkBoxWANMode
             // 
-            richTextMasterIP.BackColor = Color.Black;
-            richTextMasterIP.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            richTextMasterIP.ForeColor = Color.Yellow;
-            richTextMasterIP.Location = new Point(18, 79);
-            richTextMasterIP.Name = "richTextMasterIP";
-            richTextMasterIP.Size = new Size(149, 33);
-            richTextMasterIP.TabIndex = 0;
-            richTextMasterIP.Text = "";
-            richTextMasterIP.TextChanged += richTextBox1_TextChanged;
+            checkBoxWANMode.AutoSize = true;
+            checkBoxWANMode.Location = new Point(45, 267);
+            checkBoxWANMode.Name = "checkBoxWANMode";
+            checkBoxWANMode.Size = new Size(88, 19);
+            checkBoxWANMode.TabIndex = 10;
+            checkBoxWANMode.Text = "WAN Mode";
+            checkBoxWANMode.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // buttonReset
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Impact", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(19, 16);
-            label3.Name = "label3";
-            label3.Size = new Size(148, 26);
-            label3.TabIndex = 1;
-            label3.Text = "Master Settings";
+            buttonReset.BackColor = Color.White;
+            buttonReset.Font = new Font("Arial", 12F, FontStyle.Bold);
+            buttonReset.Location = new Point(27, 394);
+            buttonReset.Name = "buttonReset";
+            buttonReset.Size = new Size(130, 40);
+            buttonReset.TabIndex = 9;
+            buttonReset.Text = "RESET";
+            buttonReset.UseVisualStyleBackColor = false;
             // 
-            // label4
+            // buttonReload
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(16, 61);
-            label4.Name = "label4";
-            label4.Size = new Size(59, 15);
-            label4.TabIndex = 2;
-            label4.Text = "Master IP:";
+            buttonReload.BackColor = Color.White;
+            buttonReload.Font = new Font("Arial", 12F, FontStyle.Bold);
+            buttonReload.Location = new Point(27, 348);
+            buttonReload.Name = "buttonReload";
+            buttonReload.Size = new Size(130, 40);
+            buttonReload.TabIndex = 8;
+            buttonReload.Text = "RELOAD";
+            buttonReload.UseVisualStyleBackColor = false;
+            buttonReload.Click += reload_CFG;
             // 
-            // label5
+            // buttonApply
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(16, 126);
-            label5.Name = "label5";
-            label5.Size = new Size(71, 15);
-            label5.TabIndex = 4;
-            label5.Text = "Master Port:";
-            // 
-            // richTextMasterPort
-            // 
-            richTextMasterPort.BackColor = Color.Black;
-            richTextMasterPort.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            richTextMasterPort.ForeColor = Color.Yellow;
-            richTextMasterPort.Location = new Point(18, 144);
-            richTextMasterPort.Name = "richTextMasterPort";
-            richTextMasterPort.Size = new Size(149, 33);
-            richTextMasterPort.TabIndex = 3;
-            richTextMasterPort.Text = "";
+            buttonApply.BackColor = Color.White;
+            buttonApply.Font = new Font("Arial", 12F, FontStyle.Bold);
+            buttonApply.Location = new Point(27, 302);
+            buttonApply.Name = "buttonApply";
+            buttonApply.Size = new Size(130, 40);
+            buttonApply.TabIndex = 7;
+            buttonApply.Text = "APPLY";
+            buttonApply.UseVisualStyleBackColor = false;
             // 
             // label6
             // 
@@ -203,63 +196,102 @@
             richTextToken.Text = "";
             richTextToken.TextChanged += richTextToken_TextChanged;
             // 
-            // buttonApply
+            // label5
             // 
-            buttonApply.BackColor = Color.White;
-            buttonApply.Font = new Font("Arial", 12F, FontStyle.Bold);
-            buttonApply.Location = new Point(27, 302);
-            buttonApply.Name = "buttonApply";
-            buttonApply.Size = new Size(130, 40);
-            buttonApply.TabIndex = 7;
-            buttonApply.Text = "APPLY";
-            buttonApply.UseVisualStyleBackColor = false;
-            buttonApply.Click += this.button1_Click;
+            label5.AutoSize = true;
+            label5.Location = new Point(16, 126);
+            label5.Name = "label5";
+            label5.Size = new Size(71, 15);
+            label5.TabIndex = 4;
+            label5.Text = "Master Port:";
             // 
-            // buttonReload
+            // richTextMasterPort
             // 
-            buttonReload.BackColor = Color.White;
-            buttonReload.Font = new Font("Arial", 12F, FontStyle.Bold);
-            buttonReload.Location = new Point(27, 348);
-            buttonReload.Name = "buttonReload";
-            buttonReload.Size = new Size(130, 40);
-            buttonReload.TabIndex = 8;
-            buttonReload.Text = "RELOAD";
-            buttonReload.UseVisualStyleBackColor = false;
-            buttonReload.Click += button2_Click;
+            richTextMasterPort.BackColor = Color.Black;
+            richTextMasterPort.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            richTextMasterPort.ForeColor = Color.Yellow;
+            richTextMasterPort.Location = new Point(18, 144);
+            richTextMasterPort.Name = "richTextMasterPort";
+            richTextMasterPort.Size = new Size(149, 33);
+            richTextMasterPort.TabIndex = 3;
+            richTextMasterPort.Text = "";
             // 
-            // buttonReset
+            // label4
             // 
-            buttonReset.BackColor = Color.White;
-            buttonReset.Font = new Font("Arial", 12F, FontStyle.Bold);
-            buttonReset.Location = new Point(27, 394);
-            buttonReset.Name = "buttonReset";
-            buttonReset.Size = new Size(130, 40);
-            buttonReset.TabIndex = 9;
-            buttonReset.Text = "RESET";
-            buttonReset.UseVisualStyleBackColor = false;
+            label4.AutoSize = true;
+            label4.Location = new Point(16, 61);
+            label4.Name = "label4";
+            label4.Size = new Size(59, 15);
+            label4.TabIndex = 2;
+            label4.Text = "Master IP:";
             // 
-            // checkBoxWANMode
+            // label3
             // 
-            checkBoxWANMode.AutoSize = true;
-            checkBoxWANMode.Location = new Point(45, 267);
-            checkBoxWANMode.Name = "checkBoxWANMode";
-            checkBoxWANMode.Size = new Size(88, 19);
-            checkBoxWANMode.TabIndex = 10;
-            checkBoxWANMode.Text = "WAN Mode";
-            checkBoxWANMode.UseVisualStyleBackColor = true;
+            label3.AutoSize = true;
+            label3.Font = new Font("Impact", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(19, 16);
+            label3.Name = "label3";
+            label3.Size = new Size(148, 26);
+            label3.TabIndex = 1;
+            label3.Text = "Master Settings";
+            // 
+            // richTextMasterIP
+            // 
+            richTextMasterIP.BackColor = Color.Black;
+            richTextMasterIP.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            richTextMasterIP.ForeColor = Color.Yellow;
+            richTextMasterIP.Location = new Point(18, 79);
+            richTextMasterIP.Name = "richTextMasterIP";
+            richTextMasterIP.Size = new Size(149, 33);
+            richTextMasterIP.TabIndex = 0;
+            richTextMasterIP.Text = "";
+            richTextMasterIP.TextChanged += richTextBox1_TextChanged;
             // 
             // panel2
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
-            panel2.Controls.Add(button3);
-            panel2.Controls.Add(button2);
-            panel2.Controls.Add(button1);
+            panel2.Controls.Add(buttonLog);
+            panel2.Controls.Add(buttonConfig);
+            panel2.Controls.Add(buttonClear);
             panel2.Controls.Add(label7);
             panel2.Location = new Point(205, 134);
             panel2.Name = "panel2";
             panel2.Size = new Size(151, 222);
             panel2.TabIndex = 6;
             panel2.Paint += panel2_Paint;
+            // 
+            // buttonLog
+            // 
+            buttonLog.Font = new Font("Arial Narrow", 12F, FontStyle.Bold);
+            buttonLog.Location = new Point(9, 170);
+            buttonLog.Name = "buttonLog";
+            buttonLog.Size = new Size(130, 40);
+            buttonLog.TabIndex = 5;
+            buttonLog.Text = "Open Log";
+            buttonLog.UseVisualStyleBackColor = true;
+            buttonLog.Click += inputOpenLog;
+            // 
+            // buttonConfig
+            // 
+            buttonConfig.Font = new Font("Arial Narrow", 12F, FontStyle.Bold);
+            buttonConfig.Location = new Point(9, 114);
+            buttonConfig.Name = "buttonConfig";
+            buttonConfig.Size = new Size(130, 40);
+            buttonConfig.TabIndex = 4;
+            buttonConfig.Text = "Open Config";
+            buttonConfig.UseVisualStyleBackColor = true;
+            buttonConfig.Click += inputOpenConfig;
+            // 
+            // buttonClear
+            // 
+            buttonClear.Font = new Font("Arial Narrow", 12F, FontStyle.Bold);
+            buttonClear.Location = new Point(9, 61);
+            buttonClear.Name = "buttonClear";
+            buttonClear.Size = new Size(130, 40);
+            buttonClear.TabIndex = 3;
+            buttonClear.Text = "Clear Console";
+            buttonClear.UseVisualStyleBackColor = true;
+            buttonClear.Click += inputClearConsole;
             // 
             // label7
             // 
@@ -271,36 +303,6 @@
             label7.TabIndex = 2;
             label7.Text = "General";
             // 
-            // button1
-            // 
-            button1.Font = new Font("Arial Narrow", 12F, FontStyle.Bold);
-            button1.Location = new Point(9, 61);
-            button1.Name = "button1";
-            button1.Size = new Size(130, 40);
-            button1.TabIndex = 3;
-            button1.Text = "Clear Console";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.Font = new Font("Arial Narrow", 12F, FontStyle.Bold);
-            button2.Location = new Point(9, 114);
-            button2.Name = "button2";
-            button2.Size = new Size(130, 40);
-            button2.TabIndex = 4;
-            button2.Text = "Open Config";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Font = new Font("Arial Narrow", 12F, FontStyle.Bold);
-            button3.Location = new Point(9, 170);
-            button3.Name = "button3";
-            button3.Size = new Size(130, 40);
-            button3.TabIndex = 5;
-            button3.Text = "Open Log";
-            button3.UseVisualStyleBackColor = true;
-            // 
             // buttonUpdate
             // 
             buttonUpdate.Font = new Font("Arial Narrow", 9.75F, FontStyle.Bold);
@@ -310,6 +312,7 @@
             buttonUpdate.TabIndex = 7;
             buttonUpdate.Text = "Update";
             buttonUpdate.UseVisualStyleBackColor = true;
+            buttonUpdate.Click += inputUpdate;
             // 
             // buttonHelp
             // 
@@ -320,6 +323,7 @@
             buttonHelp.TabIndex = 8;
             buttonHelp.Text = "Help";
             buttonHelp.UseVisualStyleBackColor = true;
+            buttonHelp.Click += inputHelp;
             // 
             // linkLabel1
             // 
@@ -381,9 +385,9 @@
         private Button buttonApply;
         private Panel panel2;
         private Label label7;
-        private Button button3;
-        private Button button2;
-        private Button button1;
+        private Button buttonLog;
+        private Button buttonConfig;
+        private Button buttonClear;
         private Button buttonUpdate;
         private Button buttonHelp;
         private LinkLabel linkLabel1;

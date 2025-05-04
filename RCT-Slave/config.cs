@@ -8,8 +8,19 @@ using System.Xml.Serialization;
 namespace RCT_Slave
 {
     [XmlRoot("Config")]
-    public class config
+    public class Config
     {
 
+        [XmlElement("MasterIP")]
+        public string MasterIP { get; set; }
+
+        [XmlElement("ListenerPort")]
+        public int ListenerPort { get; set; }
+
+        [XmlElement("Token")]
+        public string Token { get; set; }
+
+        [XmlElement("WANMode")]
+        public bool WanMode { get; set; }
     }
 }
