@@ -307,7 +307,7 @@ namespace RCT_Slave
                     {
                         form.AppendSuccess($"Link Established. Sending Response to {MasterIp}");
                     }));
-                    SendMessage("HALO");
+                    SendMessage("Connection Established. RCT Link online!");
                     break;
 
             }
