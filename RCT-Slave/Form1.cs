@@ -207,14 +207,14 @@ namespace RCT_Slave
         private void save_CFG(object sender, EventArgs e)
         {
             AppendInfoText("Saving config.xml ...");
-            Config config = new Config
-            {
-                MasterIP = richTextMasterIP.Text,
-                MasterPort = int.Parse(richTextMasterPort.Text),
-                Token = richTextToken.Text,
-                WanMode = checkBoxWANMode.Checked
 
-            };
+            Config config = Program.LoadConfig("config.xml", true) ?? new Config();
+
+            config.MasterIP = richTextMasterIP.Text;
+            config.MasterPort = int.TryParse(richTextMasterPort.Text, out int port) ? port : 65000;
+            config.Token = richTextToken.Text;
+            config.WanMode = checkBoxWANMode.Checked;
+
             Program.SaveConfigFile(config, "config.xml");
         }
 
