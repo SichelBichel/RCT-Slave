@@ -46,9 +46,18 @@
             buttonReload = new Button();
             buttonReset = new Button();
             checkBoxWANMode = new CheckBox();
+            panel2 = new Panel();
+            label7 = new Label();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
+            buttonUpdate = new Button();
+            buttonHelp = new Button();
+            linkLabel1 = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBox1
@@ -104,6 +113,7 @@
             // 
             // panel1
             // 
+            panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(checkBoxWANMode);
             panel1.Controls.Add(buttonReset);
             panel1.Controls.Add(buttonReload);
@@ -193,35 +203,38 @@
             // 
             // buttonApply
             // 
+            buttonApply.BackColor = Color.White;
             buttonApply.Font = new Font("Arial", 12F, FontStyle.Bold);
             buttonApply.Location = new Point(27, 302);
             buttonApply.Name = "buttonApply";
             buttonApply.Size = new Size(130, 40);
             buttonApply.TabIndex = 7;
             buttonApply.Text = "APPLY";
-            buttonApply.UseVisualStyleBackColor = true;
+            buttonApply.UseVisualStyleBackColor = false;
             buttonApply.Click += this.button1_Click;
             // 
             // buttonReload
             // 
+            buttonReload.BackColor = Color.White;
             buttonReload.Font = new Font("Arial", 12F, FontStyle.Bold);
             buttonReload.Location = new Point(27, 348);
             buttonReload.Name = "buttonReload";
             buttonReload.Size = new Size(130, 40);
             buttonReload.TabIndex = 8;
             buttonReload.Text = "RELOAD";
-            buttonReload.UseVisualStyleBackColor = true;
+            buttonReload.UseVisualStyleBackColor = false;
             buttonReload.Click += button2_Click;
             // 
             // buttonReset
             // 
+            buttonReset.BackColor = Color.White;
             buttonReset.Font = new Font("Arial", 12F, FontStyle.Bold);
             buttonReset.Location = new Point(27, 394);
             buttonReset.Name = "buttonReset";
             buttonReset.Size = new Size(130, 40);
             buttonReset.TabIndex = 9;
             buttonReset.Text = "RESET";
-            buttonReset.UseVisualStyleBackColor = true;
+            buttonReset.UseVisualStyleBackColor = false;
             // 
             // checkBoxWANMode
             // 
@@ -233,11 +246,98 @@
             checkBoxWANMode.Text = "WAN Mode";
             checkBoxWANMode.UseVisualStyleBackColor = true;
             // 
+            // panel2
+            // 
+            panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(button3);
+            panel2.Controls.Add(button2);
+            panel2.Controls.Add(button1);
+            panel2.Controls.Add(label7);
+            panel2.Location = new Point(205, 134);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(151, 222);
+            panel2.TabIndex = 6;
+            panel2.Paint += panel2_Paint;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Impact", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(32, 17);
+            label7.Name = "label7";
+            label7.Size = new Size(81, 26);
+            label7.TabIndex = 2;
+            label7.Text = "General";
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Arial Narrow", 12F, FontStyle.Bold);
+            button1.Location = new Point(9, 61);
+            button1.Name = "button1";
+            button1.Size = new Size(130, 40);
+            button1.TabIndex = 3;
+            button1.Text = "Clear Console";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Font = new Font("Arial Narrow", 12F, FontStyle.Bold);
+            button2.Location = new Point(9, 114);
+            button2.Name = "button2";
+            button2.Size = new Size(130, 40);
+            button2.TabIndex = 4;
+            button2.Text = "Open Config";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Font = new Font("Arial Narrow", 12F, FontStyle.Bold);
+            button3.Location = new Point(9, 170);
+            button3.Name = "button3";
+            button3.Size = new Size(130, 40);
+            button3.TabIndex = 5;
+            button3.Text = "Open Log";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // buttonUpdate
+            // 
+            buttonUpdate.Font = new Font("Arial Narrow", 9.75F, FontStyle.Bold);
+            buttonUpdate.Location = new Point(93, 109);
+            buttonUpdate.Name = "buttonUpdate";
+            buttonUpdate.Size = new Size(53, 23);
+            buttonUpdate.TabIndex = 7;
+            buttonUpdate.Text = "Update";
+            buttonUpdate.UseVisualStyleBackColor = true;
+            // 
+            // buttonHelp
+            // 
+            buttonHelp.Font = new Font("Arial Narrow", 9.75F, FontStyle.Bold);
+            buttonHelp.Location = new Point(146, 109);
+            buttonHelp.Name = "buttonHelp";
+            buttonHelp.Size = new Size(53, 23);
+            buttonHelp.TabIndex = 8;
+            buttonHelp.Text = "Help";
+            buttonHelp.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(18, 590);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(176, 15);
+            linkLabel1.TabIndex = 9;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "https://rehoga-interactive.com/";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 617);
+            Controls.Add(linkLabel1);
+            Controls.Add(buttonHelp);
+            Controls.Add(buttonUpdate);
+            Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -252,6 +352,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -275,5 +377,13 @@
         private Button buttonReset;
         private Button buttonReload;
         private Button buttonApply;
+        private Panel panel2;
+        private Label label7;
+        private Button button3;
+        private Button button2;
+        private Button button1;
+        private Button buttonUpdate;
+        private Button buttonHelp;
+        private LinkLabel linkLabel1;
     }
 }
