@@ -110,6 +110,41 @@ namespace RCT_Slave
         }
 
 
+
+        //##############################
+        //         Sender
+        //##############################
+
+        public static void SendMessage(string content)
+        {
+            try
+            {
+                using (TcpClient client = new TcpClient(MasterIp, MasterPort))
+                {
+
+
+                    NetworkStream stream = client.GetStream();
+                    string message = $"{hashKey}-{token}-{content}";
+
+                    string encryptedMessage = CryptoCore.Encrypt(message);
+
+
+                    byte[] data = Encoding.UTF8.GetBytes(encryptedMessage);
+
+                    // send
+                    stream.Write(data, 0, data.Length);
+                    form.AppendMessageText("Message Sent: ");
+                    form.AppendInfoText(content);
+                }
+            }
+            catch (Exception ex)
+            {
+                form.AppendError($"Error: {ex.Message}");
+            }
+        }
+
+
+
         //##############################
         //         Readback Listener
         //##############################
@@ -157,7 +192,7 @@ namespace RCT_Slave
 
                         string[] parts = decryptedMessage.Split('-');
                         string parsedMessage;
-                        string responseMessage;
+                        string instructionMessage;
 
                         if (parts.Length == 3)
                         {
@@ -168,19 +203,21 @@ namespace RCT_Slave
                             if (incomingToken == Program.token)
                             {
                                 parsedMessage = content;
-                                responseMessage = CryptoCore.Encrypt($"ACK-{content}");
+                                instructionMessage = CryptoCore.Encrypt($"ACK-{content}");
 
                                 form.Invoke(new Action(() =>
                                 {
                                     form.AppendReadbackText("[INBOUND]: ");
                                     form.AppendInfoText(parsedMessage);
                                 }));
+
+                                ActionHandler(parsedMessage);
                             }
                             else
                             {
 
                                 parsedMessage = $"Invalid token received";
-                                responseMessage = CryptoCore.Encrypt("ERR-InvalidToken");
+                                instructionMessage = CryptoCore.Encrypt("ERR-InvalidToken");
 
 
                                 if (WanMode == false)
@@ -248,6 +285,30 @@ namespace RCT_Slave
         {
             form.Invoke(new Action(() => form.AppendInfoText(message)));
         }
+
+
+        //##############################
+        //         Action Handler
+        //##############################
+
+
+        public static void ActionHandler(string parsedMessage)
+        {
+
+            switch (parsedMessage)
+            {
+                case "[RCT]ConnectionTest[RCT]":
+                    form.Invoke(new Action(() =>
+                    {
+                        form.AppendWarning(parsedMessage + "Link Established. Sending Response.");
+                    }));
+                   
+                    break;
+
+            }
+        }
+
+        
 
     }
 }
