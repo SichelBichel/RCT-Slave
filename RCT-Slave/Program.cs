@@ -119,7 +119,7 @@ namespace RCT_Slave
         {
             try
             {
-                using (TcpClient client = new TcpClient(MasterIp, MasterPort))
+                using (TcpClient client = new TcpClient(MasterIp, responsePort))
                 {
 
 
@@ -133,8 +133,6 @@ namespace RCT_Slave
 
                     // send
                     stream.Write(data, 0, data.Length);
-                    form.AppendMessageText("Message Sent: ");
-                    form.AppendInfoText(content);
                 }
             }
             catch (Exception ex)
@@ -182,6 +180,13 @@ namespace RCT_Slave
                     using (TcpClient client = await readbackListener.AcceptTcpClientAsync())
                     using (NetworkStream stream = client.GetStream())
                     {
+                        var remoteIp = ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
+
+                        if (remoteIp != Program.MasterIp)
+                        {
+                            continue;  
+                        }
+
                         byte[] buffer = new byte[1024];
                         int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
 
@@ -216,7 +221,7 @@ namespace RCT_Slave
                             else
                             {
 
-                                parsedMessage = $"Invalid token received";
+                                parsedMessage = $"Invalid token received from {MasterIp}";
                                 instructionMessage = CryptoCore.Encrypt("ERR-InvalidToken");
 
 
@@ -300,9 +305,9 @@ namespace RCT_Slave
                 case "[RCT]ConnectionTest[RCT]":
                     form.Invoke(new Action(() =>
                     {
-                        form.AppendWarning(parsedMessage + "Link Established. Sending Response.");
+                        form.AppendSuccess($"Link Established. Sending Response to {MasterIp}");
                     }));
-                   
+                    SendMessage("HALO");
                     break;
 
             }
