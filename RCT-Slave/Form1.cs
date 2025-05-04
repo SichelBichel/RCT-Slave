@@ -197,9 +197,10 @@ namespace RCT_Slave
             {
                 await Task.Delay(50);
                 AppendInfoText("Generating new config.xml ...");
+                Config defaultConfig = CreateDefaultConfig();
+                Program.SaveConfigFile(defaultConfig, "config.xml");
                 await Task.Delay(100);
                 AppendSuccess("config.xml Generated!");
-                save_CFG(null, null);
             }
         }
 
