@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -10,7 +11,7 @@ namespace RCT_Slave
     {
         public static Form1 form;
 
-
+        public static Config LoadedConfig { get; private set; }
         public static string MasterIp = "127.0.0.1";
         public static int MasterPort = 1;
         public static int responsePort = 65534;
@@ -53,10 +54,11 @@ namespace RCT_Slave
                     using (StreamReader reader = new StreamReader(filePath))
                     {
                         Config config = (Config)serializer.Deserialize(reader);
+                        LoadedConfig = config;
                         MasterIp = config.MasterIP;
                         if (silentMode == false)
                         {
-                            form.AppendSuccess("config.xml loaded and applied!");
+                            form.AppendSuccess("SlaveConfig.xml loaded and applied!");
                         }
                         MasterPort = config.MasterPort;
                         token = config.Token;
@@ -70,13 +72,13 @@ namespace RCT_Slave
                 }
                 else
                 {
-                    form.AppendWarning("config.xml not existing");
+                    form.AppendWarning("SlaveConfig.xml not existing");
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                form.AppendError("config.xml read error: " + ex.Message);
+                form.AppendError("SlaveConfig.xml read error: " + ex.Message);
                 return null;
             }
         }
@@ -99,9 +101,9 @@ namespace RCT_Slave
                     WanMode = config.WanMode;
                     form.LogToFile("[CFG WRITE CONTENT] " + MasterIp + ":" + MasterPort + ":" + token + ":" + "[CFG WRITE CONTENT]");
                 }
-                form.AppendSuccess("config.xml saved!");
+                form.AppendSuccess("SlaveConfig.xml saved!");
                 await Task.Delay(200);
-                LoadConfig("config.xml", true);
+                LoadConfig("SlaveConfig.xml", true);
             }
             catch (Exception ex)
             {
@@ -212,7 +214,7 @@ namespace RCT_Slave
 
                                 form.Invoke(new Action(() =>
                                 {
-                                    form.AppendReadbackText("[INBOUND]: ");
+                                    form.AppendReadbackText(MasterIp + ": ");
                                     form.AppendInfoText(parsedMessage);
                                 }));
 
@@ -297,23 +299,91 @@ namespace RCT_Slave
         //##############################
 
 
-        public static void ActionHandler(string parsedMessage)
+        private static (string Name, string Path)? GetMatchedEvent(Config config, string message)
         {
-
-            switch (parsedMessage)
+            for (int i = 1; i <= 32; i++)
             {
-                case "[RCT]ConnectionTest[RCT]":
-                    form.Invoke(new Action(() =>
-                    {
-                        form.AppendSuccess($"Link Established. Sending Response to {MasterIp}");
-                    }));
-                    SendMessage("Connection Established. RCT Link online!");
-                    break;
+                var nameProp = typeof(Config).GetProperty($"Event{i}Name");
+                var pathProp = typeof(Config).GetProperty($"Event{i}Path");
 
+                if (nameProp != null && pathProp != null)
+                {
+                    string eventName = nameProp.GetValue(config)?.ToString();
+                    string eventPath = pathProp.GetValue(config)?.ToString();
+
+                    if (!string.IsNullOrEmpty(eventName) && message == eventName)
+                    {
+                        return (Name: eventName, Path: eventPath);
+                    }
+                }
             }
+
+            return null;
         }
 
-        
+        public static void ActionHandler(string parsedMessage)
+        {
+            var config = LoadedConfig;
+            if (config == null) return;
 
+            if (parsedMessage == "[RCT]ConnectionTest[RCT]")
+            {
+                form.Invoke(new Action(() =>
+                {
+                    form.AppendSuccess($"Link Established. Sending Response to {MasterIp}");
+                }));
+                SendMessage("Connection Established. RCT Link online!");
+                return;
+            }
+
+            var matchedEvent = GetMatchedEvent(config, parsedMessage);
+            if (matchedEvent.HasValue)
+            {
+                var eventName = matchedEvent.Value.Name;
+                var eventPath = matchedEvent.Value.Path;
+
+                form.Invoke(new Action(() =>
+                {
+                    form.AppendSuccess($"Event triggered: {eventName} - {eventPath}");
+                }));
+
+                if (!string.IsNullOrWhiteSpace(eventPath) && eventPath != "empty")
+                {
+                    try
+                    {
+                        Process.Start(new ProcessStartInfo
+                        {
+                            FileName = eventPath,
+                            UseShellExecute = true
+                        });
+
+                        SendMessage(eventName + " Executed Successfully!");
+
+                        form.Invoke(new Action(() =>
+                        {
+                            form.AppendInfoText(eventPath + " Executed by: " + MasterIp);
+                        }));
+                    }
+                    catch (Exception ex)
+                    {
+                        form.Invoke(new Action(() =>
+                        {
+                            form.AppendError($"Error executing: {ex.Message}");
+                        }));
+
+                        SendMessage(eventName + ": " + ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                form.Invoke(new Action(() =>
+                {
+                    form.AppendWarning($"Function not configured {parsedMessage}");
+                }));
+
+                SendMessage($"Function not configured {parsedMessage}");
+            }          
+        }
     }
 }

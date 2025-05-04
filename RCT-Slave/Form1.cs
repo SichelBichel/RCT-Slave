@@ -155,13 +155,13 @@ namespace RCT_Slave
         {
             try
             {
-                if (File.Exists("config.xml"))
+                if (File.Exists("SlaveConfig.xml"))
                 {
                     try
                     {
                         Process.Start(new ProcessStartInfo
                         {
-                            FileName = "config.xml",
+                            FileName = "SlaveConfig.xml",
                             UseShellExecute = true
                         });
                     }
@@ -183,8 +183,8 @@ namespace RCT_Slave
 
         private async void reload_CFG(object sender, EventArgs e)
         {
-            AppendInfoText("Reloading config.xml ...");
-            Config config = Program.LoadConfig("config.xml", false);
+            AppendInfoText("Reloading SlaveConfig.xml ...");
+            Config config = Program.LoadConfig("SlaveConfig.xml", false);
 
             if (config != null)
             {
@@ -196,26 +196,26 @@ namespace RCT_Slave
             else
             {
                 await Task.Delay(50);
-                AppendInfoText("Generating new config.xml ...");
+                AppendInfoText("Generating new SlaveConfig.xml ...");
                 Config defaultConfig = CreateDefaultConfig();
-                Program.SaveConfigFile(defaultConfig, "config.xml");
+                Program.SaveConfigFile(defaultConfig, "SlaveConfig.xml");
                 await Task.Delay(100);
-                AppendSuccess("config.xml Generated!");
+                AppendSuccess("SlaveConfig.xml Generated!");
             }
         }
 
         private void save_CFG(object sender, EventArgs e)
         {
-            AppendInfoText("Saving config.xml ...");
+            AppendInfoText("Saving SlaveConfig.xml ...");
 
-            Config config = Program.LoadConfig("config.xml", true) ?? new Config();
+            Config config = Program.LoadConfig("SlaveConfig.xml", true) ?? new Config();
 
             config.MasterIP = richTextMasterIP.Text;
             config.MasterPort = int.TryParse(richTextMasterPort.Text, out int port) ? port : 65000;
             config.Token = richTextToken.Text;
             config.WanMode = checkBoxWANMode.Checked;
 
-            Program.SaveConfigFile(config, "config.xml");
+            Program.SaveConfigFile(config, "SlaveConfig.xml");
         }
 
         private async void delCFG(object sender, EventArgs e)
@@ -234,7 +234,7 @@ namespace RCT_Slave
                 return;
             }
 
-            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.xml");
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SlaveConfig.xml");
 
             if (File.Exists(filePath))
             {
@@ -243,13 +243,13 @@ namespace RCT_Slave
             }
             else
             {
-                AppendWarning("config.xml does not exist.");
+                AppendWarning("SlaveConfig.xml does not exist.");
             }
 
             await Task.Delay(250);
 
             Config defaultConfig = CreateDefaultConfig();
-            Program.SaveConfigFile(defaultConfig, "config.xml");
+            Program.SaveConfigFile(defaultConfig, "SlaveConfig.xml");
             await Task.Delay(200);
             reload_CFG(null, null);
         }
