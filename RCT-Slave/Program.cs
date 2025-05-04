@@ -63,7 +63,7 @@ namespace RCT_Slave
                         responsePort = config.MasterPort + 1;
                         WanMode = config.WanMode;
                         form.LogToFile("[LOG READ CONTENT] " + MasterIp + ":" + MasterPort + ":" + token + ":" + "[LOG READ CONTENT]");
-
+                        RestartReadback();
 
                         return config;
                     }
@@ -172,7 +172,7 @@ namespace RCT_Slave
 
                                 form.Invoke(new Action(() =>
                                 {
-                                    form.AppendReadbackText("[READBACK]: ");
+                                    form.AppendReadbackText("[INBOUND]: ");
                                     form.AppendInfoText(parsedMessage);
                                 }));
                             }
