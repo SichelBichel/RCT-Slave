@@ -110,5 +110,114 @@ namespace RCT_Slave
 
         [XmlElement("Event14Path")]
         public string Event14Path { get; set; }
+
+        [XmlElement("Event15Name")]
+        public string Event15Name { get; set; }
+
+        [XmlElement("Event15Path")]
+        public string Event15Path { get; set; }
+
+        [XmlElement("Event16Name")]
+        public string Event16Name { get; set; }
+
+        [XmlElement("Event16Path")]
+        public string Event16Path { get; set; }
+
+        [XmlElement("Event17Name")]
+        public string Event17Name { get; set; }
+
+        [XmlElement("Event17Path")]
+        public string Event17Path { get; set; }
+
+        [XmlElement("Event18Name")]
+        public string Event18Name { get; set; }
+
+        [XmlElement("Event18Path")]
+        public string Event18Path { get; set; }
+
+        [XmlElement("Event19Name")]
+        public string Event19Name { get; set; }
+
+        [XmlElement("Event19Path")]
+        public string Event19Path { get; set; }
+
+        [XmlElement("Event20Name")]
+        public string Event20Name { get; set; }
+
+        [XmlElement("Event20Path")]
+        public string Event20Path { get; set; }
+
+        [XmlElement("Event21Name")]
+        public string Event21Name { get; set; }
+
+        [XmlElement("Event21Path")]
+        public string Event21Path { get; set; }
+
+        [XmlElement("Event22Name")]
+        public string Event22Name { get; set; }
+
+        [XmlElement("Event22Path")]
+        public string Event22Path { get; set; }
+
+        [XmlElement("Event23Name")]
+        public string Event23Name { get; set; }
+
+        [XmlElement("Event23Path")]
+        public string Event23Path { get; set; }
+
+        [XmlElement("Event24Name")]
+        public string Event24Name { get; set; }
+
+        [XmlElement("Event24Path")]
+        public string Event24Path { get; set; }
+
+        [XmlElement("Event25Name")]
+        public string Event25Name { get; set; }
+
+        [XmlElement("Event25Path")]
+        public string Event25Path { get; set; }
+
+        [XmlElement("Event26Name")]
+        public string Event26Name { get; set; }
+
+        [XmlElement("Event26Path")]
+        public string Event26Path { get; set; }
+
+        [XmlElement("Event27Name")]
+        public string Event27Name { get; set; }
+
+        [XmlElement("Event27Path")]
+        public string Event27Path { get; set; }
+
+        [XmlElement("Event28Name")]
+        public string Event28Name { get; set; }
+
+        [XmlElement("Event28Path")]
+        public string Event28Path { get; set; }
+
+        [XmlElement("Event29Name")]
+        public string Event29Name { get; set; }
+
+        [XmlElement("Event29Path")]
+        public string Event29Path { get; set; }
+
+        [XmlElement("Event30Name")]
+        public string Event30Name { get; set; }
+
+        [XmlElement("Event30Path")]
+        public string Event30Path { get; set; }
+
+        [XmlElement("Event31Name")]
+        public string Event31Name { get; set; }
+
+        [XmlElement("Event31Path")]
+        public string Event31Path { get; set; }
+
+        [XmlElement("Event32Name")]
+        public string Event32Name { get; set; }
+
+        [XmlElement("Event32Path")]
+        public string Event32Path { get; set; }
+
     }
 }
