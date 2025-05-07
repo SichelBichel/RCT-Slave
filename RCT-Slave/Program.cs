@@ -9,7 +9,7 @@ namespace RCT_Slave
 {
     internal static class Program
     {
-        public static Form1 form;
+        public static MainForm form;
 
         public static Config LoadedConfig { get; private set; }
         public static string MasterIp = "127.0.0.1";
@@ -28,7 +28,7 @@ namespace RCT_Slave
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            form = new Form1();
+            form = new MainForm();
             Application.Run(form);
         }
 

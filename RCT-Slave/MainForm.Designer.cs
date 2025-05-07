@@ -1,6 +1,6 @@
 ﻿namespace RCT_Slave
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             pictureBox1 = new PictureBox();
             ConsoleOutput = new RichTextBox();
             pictureBox2 = new PictureBox();
@@ -83,7 +83,7 @@
             // 
             // pictureBox2
             // 
-            pictureBox2.Image = Properties.Resources.BannerRCT;
+            pictureBox2.Image = Properties.Resources.RCT;
             pictureBox2.Location = new Point(256, 12);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(100, 93);
@@ -339,7 +339,7 @@
             linkLabel1.TabStop = true;
             linkLabel1.Text = "https://rehoga-interactive.com/";
             // 
-            // Form1
+            // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -356,8 +356,8 @@
             Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "Form1";
-            Text = "RCT-Slave";
+            Name = "MainForm";
+            Text = "RCT-Slave - Remote Control Terminal";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel1.ResumeLayout(false);

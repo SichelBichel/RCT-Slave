@@ -73,6 +73,16 @@ namespace RCT_Slave.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap RCT {
+            get {
+                object obj = ResourceManager.GetObject("RCT", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ReHoGaBanner3_0_Transparent {
             get {
                 object obj = ResourceManager.GetObject("ReHoGaBanner3.0_Transparent", resourceCulture);
