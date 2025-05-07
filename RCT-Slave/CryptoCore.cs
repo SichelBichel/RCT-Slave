@@ -9,8 +9,8 @@ namespace RCT_Slave
 {
     public static class CryptoCore
     {
-        private static readonly byte[] key = Encoding.UTF8.GetBytes("&7vn3%s!2(Jv!2kc"); // 16b
-        private static readonly byte[] iv = Encoding.UTF8.GetBytes("J!%v2n7k3&Vc)!s*"); // 16b
+        private static readonly byte[] key = Encoding.UTF8.GetBytes("ChangeAndCompile"); // 16b
+        private static readonly byte[] iv = Encoding.UTF8.GetBytes("ChangeAndCompile"); // 16b
 
         public static string Encrypt(string plainText)
         {
