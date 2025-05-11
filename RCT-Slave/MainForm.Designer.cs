@@ -109,7 +109,7 @@
             label2.Name = "label2";
             label2.Size = new Size(75, 15);
             label2.TabIndex = 4;
-            label2.Text = "Version: 1.0.1";
+            label2.Text = "Version: 1.0.2";
             // 
             // panel1
             // 
